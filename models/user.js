@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const crypto =require('crypto');
-const uuidv1 = require('uuid/v1');
+const { v4: uuidv4 } = require('uuid');
 
 const UserSchema = Schema({
     name:{
@@ -37,17 +37,17 @@ const UserSchema = Schema({
 },{timestamps:true})
 
 
-userSchema.virtual("password")
+UserSchema.virtual("password")
     .set(function(password){
         this._password=password
-        this.salt=uuidv1();
+        this.salt=uuidv4();
         this.encry_password=this.securePassword(password)
     })
     .get(function(){
         return this._password
     })
 
-userSchema.methods={
+UserSchema.methods={
 
     authenticate:function(plainpassword){
         return this.securePassword(plainpassword)===this.encry_password
@@ -68,4 +68,4 @@ userSchema.methods={
 
 
 
-module.exports=mongoose.model("User",userSchema)
+module.exports=mongoose.model("User",UserSchema)
