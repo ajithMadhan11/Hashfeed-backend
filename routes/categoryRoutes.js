@@ -9,7 +9,7 @@ router.param('userId',getUserById)
 router.param('categoryId',getCategoryById)
 
 router.get('/category/:userId/:categoryId',isSignedIn,isAuthenticated,isAdmin,getCategory)
-router.get('/category/all/:userId',isSignedIn,isAuthenticated,isAdmin,getAllCategory)
+router.get('/category/:userId',isSignedIn,isAuthenticated,isAdmin,getAllCategory)
 
 router.post('/category/add/:userId',isSignedIn,isAuthenticated,isAdmin,addCategory)
 

@@ -30,10 +30,10 @@ exports.getAllCategory=(req,res)=>{
 
 exports.addCategory=(req,res)=>{
     const category = new Category(req.body)
-    category.save().exec((err,category)=>{
+    category.save((err,category)=>{
         if(err){
             return res.status(400).json({
-                message:"Error saving dcategory in DB"
+                message:"Error saving category in DB"
             })
         }
         res.json(category)
@@ -42,20 +42,18 @@ exports.addCategory=(req,res)=>{
 
 exports.updateCategory=(req,res)=>{
 
-    Category.findByIdAndUpdate(
-        {_id:req.category._id},
-        {$set:req.body},
-        {new:true,useFindAndModify:false},
-        (err,category)=>{
-            if(err){
-              return  res.status(400).json({
-                  message:"You are not authorized to make changes"
-              })
-            }
-           
-            res.json(category)
+    const category = req.category;
+    category.name=req.body.name;
+
+    category.save((err,updatedCategory)=>{
+        if(err){
+            console.log(err)
+            return res.status(400).json({
+                error:"Update category FAILED"
+            })
         }
-    )
+        res.json(updatedCategory)
+    });
 }
 
 exports.delCategory=()=>{

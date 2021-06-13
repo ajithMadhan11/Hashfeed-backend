@@ -6,8 +6,9 @@ const user = require("../models/user")
 exports.getUserById=(req,res,next,id)=>{
 user.findById(id).exec((err,user)=>{
     if(err || !user){
+        console.log(err)
         return res.status(400).json({
-            message:"No user found"
+            message:"No user found :("
         })
     }
     req.profile=user;
