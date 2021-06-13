@@ -65,7 +65,6 @@ exports.signout =(req,res)=>{
 }
 
 
-
 //Protected Route
 exports.isSignedIn = expressJwt({
     secret:process.env.SECRET,
@@ -75,3 +74,23 @@ exports.isSignedIn = expressJwt({
 
 
 //custom middle ware
+exports.isAuthenticated=(req,res,next)=>{
+
+    let checker =req.profile && req.auth && req.profile._id == req.auth.id; 
+    if(!checker){
+       return res.status(403).json({
+           message:"ACCESS-DENIED"
+       })
+    }
+    next();
+}
+
+
+exports.isAdmin=(req,res,next)=>{
+    if(req.profile.role===0){
+        return res.status(403).json({
+            message:"YOU ARE NOT AN ADMIN"
+        })
+    }
+    next();
+}

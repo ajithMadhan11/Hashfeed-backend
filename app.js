@@ -26,6 +26,9 @@ app.use(cookieParser());
 
 //my routes
 const authRoutes =require('./routes/authRoutes')
+const userRoutes = require('./routes/userRoutes')
+const postRoutes = require('./routes/postRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
 
 
 //basic route
@@ -35,4 +38,7 @@ app.get('/',(req,res)=>{
 
 //api Routes
 app.use("/api",authRoutes)
+app.use("/api",userRoutes)
+app.use("/api",postRoutes)
+app.use("/api",categoryRoutes)
 
