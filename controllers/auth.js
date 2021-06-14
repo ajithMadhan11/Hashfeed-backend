@@ -39,7 +39,7 @@ User.findOne({email},(err,user)=>{
 
 //Signup controller
 exports.signup =(req,res)=>{
-    console.log("came");
+
     const user=new User(req.body);
     user.save((err,user)=>{
         if(err){

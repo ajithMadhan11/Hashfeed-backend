@@ -56,6 +56,14 @@ exports.updateCategory=(req,res)=>{
     });
 }
 
-exports.delCategory=()=>{
-//
+exports.delCategory=(req,res)=>{
+    const category =req.category;
+    category.remove((err,category)=>{
+        if(err){
+            return res.statue(400).json({
+                message:"delete category failed"
+            })
+        }
+        res.send(`${req.category.name} is deleted successfully`)
+    })
 }
