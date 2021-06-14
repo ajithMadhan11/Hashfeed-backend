@@ -15,8 +15,10 @@ router.put('/post/add/:userId',isSignedIn,isAuthenticated,isOwnPost,updatepost)
 
 router.get('/post/:postId',getPost)
 router.get('/post/all',getAllPost)
-router.get('/post/delete/:postId',isSignedIn,isAuthenticated,isOwnPost,delPost)
-router.get('/post/delete/admin/:postId',isSignedIn,isAuthenticated,isAdmin,delPost)
+
+
+router.delete('/post/delete/:postId',isSignedIn,isAuthenticated,isOwnPost,delPost)
+router.delete('/post/delete/admin/:postId',isSignedIn,isAuthenticated,isAdmin,delPost)
 
 module.exports=router;
 

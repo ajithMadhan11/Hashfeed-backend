@@ -26,6 +26,8 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "express-validator": "^6.11.1",
+    "formidable": "^1.2.2",
+    "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.13",
