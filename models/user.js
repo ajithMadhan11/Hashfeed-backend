@@ -32,6 +32,10 @@ const UserSchema = Schema({
     events:{
         type:Array,
         default:[]
+    },
+    premium:{
+        type:Number,
+        default:0
     }
 
 },{timestamps:true})

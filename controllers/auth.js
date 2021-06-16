@@ -5,7 +5,6 @@ var expressJwt = require('express-jwt');
 
 //Signin Controller
 exports.signin =(req,res)=>{
-
 const {email,password}= req.body;
 
 User.findOne({email},(err,user)=>{
