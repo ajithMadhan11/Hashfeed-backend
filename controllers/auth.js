@@ -2,7 +2,6 @@ const User = require('../models/user')
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 
-
 //Signin Controller
 exports.signin =(req,res)=>{
 const {email,password}= req.body;
@@ -10,12 +9,12 @@ const {email,password}= req.body;
 User.findOne({email},(err,user)=>{
     if(err || !user){
        return res.status(400).json({
-            message:"No user found"
+            error:"No user found"
         })
     }
     if(!user.authenticate(password)){
        return res.status(400).json({
-            message:"Password Doesn't match"
+            error:"Password Doesn't match"
         })
     }
 
@@ -43,7 +42,7 @@ exports.signup =(req,res)=>{
     user.save((err,user)=>{
         if(err){
            return res.status(400).json({
-                message:"Error saving user to DB"
+                error:"Error saving user to DB"
             })
         }
         return res.json({

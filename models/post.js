@@ -35,6 +35,10 @@ const postSchema = Schema({
     link:{
         type:String,
     },
+    date:{
+        type:Date,
+        required:true
+    },
     owner:{
         type:ObjectId,
         ref:"User",

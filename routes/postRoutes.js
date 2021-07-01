@@ -1,6 +1,6 @@
 const express = require('express');
 const { isSignedIn, isAuthenticated, isAdmin } = require('../controllers/auth');
-const { getPostById, getPost, addPost, updatepost, getAllPost, delPost, isOwnPost, addParticipants, checkDuplicateParticpant } = require('../controllers/post');
+const { getPostById, getPost, addPost,photo, updatepost,getuserpost, getAllPost, delPost, isOwnPost, addParticipants ,checkDuplicateParticpant, participantsOfaEvent, getPremiumUsers } = require('../controllers/post');
 const { getUserById } = require('../controllers/user');
 const router = express.Router();
 
@@ -15,7 +15,11 @@ router.put('/post/join/:postId/:userId',isSignedIn,isAuthenticated,checkDuplicat
 
 
 router.get('/post/:postId',getPost)
+router.get('/post/photo/:postId',photo)
 router.get('/posts',getAllPost)
+router.get('/post/participants/:userId/:postId',isSignedIn,isAuthenticated,isOwnPost,participantsOfaEvent)
+router.get('/post/user/all/:userId',isSignedIn,isAuthenticated,getuserpost)
+
 
 
 

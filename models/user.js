@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const crypto =require('crypto');
 const { v4: uuidv4 } = require('uuid');
-
+const {ObjectId} =Schema;
 const UserSchema = Schema({
     name:{
         type:String,
@@ -29,10 +29,9 @@ const UserSchema = Schema({
         type:Number,
         default:0
     },
-    events:{
-        type:Array,
-        default:[]
-    },
+    events:[{type:ObjectId,
+        ref: 'Post'
+    }],
     premium:{
         type:Number,
         default:0

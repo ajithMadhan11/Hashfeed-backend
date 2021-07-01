@@ -8,7 +8,7 @@ user.findById(id).exec((err,user)=>{
     if(err || !user){
         console.log(err)
         return res.status(400).json({
-            message:"No user found :("
+            error:"No user found :("
         })
     }
     req.profile=user;
@@ -32,7 +32,7 @@ exports.updateUser=(req,res)=>{
         (err,user)=>{
             if(err){
               return  res.status(400).json({
-                  message:"You are not authorized to make changes"
+                  error:"You are not authorized to make changes"
               })
             }
             user.salt = undefined;
@@ -46,4 +46,21 @@ exports.getUserEvents=(req,res)=>{
     let events=req.profile.events;
     res.json(events)
    
+}
+
+
+exports.getPremiumUsers=(req,res)=>{
+//   let pre= user.find( { premium: { $eq:1 } } )
+    // let preUsers= user.find( { premium: { $eq:1 } } )
+    // while (preUsers.hasNext()) {
+    //     console.log(tojson(preUsers.next()));
+    // }
+    user.find({premium: { $eq: 1 }}).exec((err,users)=>{
+        if(err || !users){
+            return res.status(400).json({
+                error:"Error retriving users"
+            })
+        }
+        res.json(users)
+    })
 }
