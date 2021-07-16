@@ -9,7 +9,7 @@ const {Schema}=mongoose;
 exports.getPostById=(req,res,next,id)=>{
    Post.findById(id)
    .populate("category")
-   .populate("owner")
+   //.populate("owner")
    .exec((err,post)=>{
        if(err){
            return res.status(400).json({
@@ -187,6 +187,26 @@ exports.checkDuplicateParticpant= (req,res,next)=>{
     }
    
 }
+
+exports.isJoinedAlready = (req,res)=>{
+    let partList=req.post.participants;
+    let flag=0;
+    partList.forEach((part)=>{
+        if(_.isEqual(part.id,req.profile._id)){
+           flag=1;
+        }
+    })
+    if(flag){
+        return res.status(400).json({
+            error:"You have already joined in this event"
+        })
+    }else{
+        return res.json({
+            message:true
+        })
+    }
+  }
+
 exports.addParticipants=(req,res)=>{
     let participant={
         id:req.profile._id,
