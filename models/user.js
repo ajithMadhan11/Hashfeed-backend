@@ -32,6 +32,9 @@ const UserSchema = Schema({
     events:[{type:ObjectId,
         ref: 'Post'
     }],
+    joinedEvents:[{type:ObjectId,
+        ref: 'Post'
+    }],
     premium:{
         type:Number,
         default:0

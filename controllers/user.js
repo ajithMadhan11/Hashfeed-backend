@@ -50,11 +50,6 @@ exports.getUserEvents=(req,res)=>{
 
 
 exports.getPremiumUsers=(req,res)=>{
-//   let pre= user.find( { premium: { $eq:1 } } )
-    // let preUsers= user.find( { premium: { $eq:1 } } )
-    // while (preUsers.hasNext()) {
-    //     console.log(tojson(preUsers.next()));
-    // }
     user.find({premium: { $eq: 1 }}).exec((err,users)=>{
         if(err || !users){
             return res.status(400).json({

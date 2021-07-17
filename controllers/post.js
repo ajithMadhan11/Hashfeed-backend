@@ -213,7 +213,12 @@ exports.addParticipants=(req,res)=>{
         name:req.profile.name,
         email:req.profile.email
     }
-
+    // let j_event ={
+    //     id:req.post._id,
+    //     title:req.post.title,
+    //     date:req.post.date,
+    //     link:req.post.link,
+    // }
 
     Post.updateOne({_id:req.post._id},{ $push: { participants: participant }},(err,rawRes)=>{
             if(err){
@@ -225,6 +230,16 @@ exports.addParticipants=(req,res)=>{
                 message:"Joined in Event Successfully!"
             })
     })
+    // User.updateOne({_id:req.profile._id},{ $push: { joinedEvents: j_event }},(err,rawRes)=>{
+    //         if(err){
+    //             return res.status(400).json({
+    //                 error:"Failed joing in this Event 2"
+    //             })
+    //         }
+    //         res.json({
+    //             message:"Joined in Event Successfully! 2"
+    //         })
+    // })
 }
 
 exports.participantsOfaEvent=(req,res)=>{
@@ -257,6 +272,27 @@ exports.getuserpost=(req,res)=>{
             res.json(posts.events)
         }
 })
-        
-      
 }
+
+// exports.joinInEvent =(req,res)=>{
+//     let j_event ={
+//         id:req.post._id,
+//         title:req.post.title,
+//         date:req.post.date,
+//         link:req.post.link,
+//     }
+
+//     User.updateOne({_id:req.profile._id},{ $push: { joinedEvents: j_event }},(err,rawRes)=>{
+//         if(err){
+//             console.log(err);
+//             return res.status(400).json({
+//                 error:"Failed to Add participant to user model"
+//             })
+//         }
+//         res.json({
+//             message:"added user to event Successfully!"
+//         })
+// })
+// }
+
+
